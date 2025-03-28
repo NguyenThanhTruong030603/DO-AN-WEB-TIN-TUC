@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sửa bài viết</title>
+</head>
+<body>
+    <h1>Sửa bài viết</h1>
+    <form action="/articles/edit/<%= article._id %>" method="POST">
+        <label for="title">Tiêu đề:</label>
+        <input type="text" id="title" name="title" value="<%= article.title %>" required>
+
+        <label for="author">Tác giả:</label>
+        <select id="author" name="author" required>
+            <% users.forEach(user => { %>
+                <option value="<%= user._id %>" <%= article.author && article.author._id.toString() === user._id.toString() ? "selected" : "" %>><%= user.username %></option>
+            <% }) %>
+        </select>
+
+        <label for="category">Danh mục:</label>
+        <select id="category" name="category" required>
+            <% categories.forEach(category => { %>
+                <option value="<%= category._id %>" <%= article.category && article.category._id.toString() === category._id.toString() ? "selected" : "" %>><%= category.name %></option>
+            <% }) %>
+        </select>
+
+        <label for="content">Nội dung:</label>
+        <textarea id="content" name="content" required><%= article.content %></textarea>
+
+        <button type="submit">Lưu</button>
+    </form>
+    <a href="/articles">Quay lại danh sách</a>
+</body>
+</html>

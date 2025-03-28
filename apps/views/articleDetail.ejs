@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết bài viết</title>
+</head>
+<body>
+    <h1><%= article.title %></h1>
+    <p><strong>Tác giả:</strong> <%= article.author ? article.author.username : "Không có" %></p>
+    <p><strong>Danh mục:</strong> <%= article.category ? article.category.name : "Không có" %></p>
+    <p><strong>Nội dung:</strong></p>
+    <p><%- article.content %></p>
+    <a href="/articles">Quay lại danh sách</a>
+</body>
+</html>

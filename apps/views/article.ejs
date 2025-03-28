@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách bài viết</title>
+</head>
+<body>
+    <h1>Danh sách bài viết</h1>
+    <a href="/articles/add">Thêm bài viết</a>
+    <table border="1">
+        <tr>
+            <th>Tiêu đề</th>
+            <th>Tác giả</th>
+            <th>Danh mục</th>
+            <th>Hành động</th>
+        </tr>
+        <% articles.forEach(article => { %>
+            <tr>
+                <td><a href="/articles/<%= article._id %>"><%= article.title %></a></td>
+                <td><%= article.author ? article.author.username : "Không có" %></td>
+                <td><%= article.category ? article.category.name : "Không có" %></td>
+                <td>
+                    <a href="/articles/edit/<%= article._id %>">Sửa</a>
+                    <form action="/articles/delete/<%= article._id %>" method="POST" style="display:inline;">
+                        <button type="submit" onclick="return confirm('Bạn có chắc chắn muốn xóa bài viết này?')">Xóa</button>
+                    </form>
+                </td>
+            </tr>
+        <% }) %>
+    </table>
+</body>
+</html>

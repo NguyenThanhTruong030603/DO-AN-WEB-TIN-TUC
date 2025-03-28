@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="./">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="description" content="CoreUI - Bootstrap Admin Template">
+    <meta name="author" content="Łukasz Holeczek">
+    <meta name="keyword" content="Bootstrap,Admin,Template,SCSS,HTML,RWD,Dashboard">
+    <title>CoreUI Bootstrap Admin Template</title>
+    <link rel="stylesheet" href="/static/admin/css/simplebar.css">
+    <link href="/static/admin/css/style.css" rel="stylesheet">
+    <link href="/static/admin/css/examples.css" rel="stylesheet">
+    <script src="js/config.js"></script>
+    <script src="js/color-modes.js"></script>
+</head>
+<body>
+    <div class="min-vh-100 d-flex flex-row align-items-center">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card-group d-block d-md-flex row">
+                        <div class="card col-md-7 p-4 mb-0">
+                            <div class="card-body">
+                                <h1>Đăng nhập</h1>
+                                <p class="text-body-secondary">Đăng nhập vào tài khoản của bạn</p>
+                                
+                                <!-- Form đăng nhập -->
+                                <form action="/login" method="POST">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">
+                                            <svg class="icon">
+                                                <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-user"></use>
+                                            </svg>
+                                        </span>
+                                        <input class="form-control" type="text" name="username" placeholder="Tên đăng nhập" required>
+                                    </div>
+
+                                    <div class="input-group mb-4">
+                                        <span class="input-group-text">
+                                            <svg class="icon">
+                                                <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-lock-locked"></use>
+                                            </svg>
+                                        </span>
+                                        <input class="form-control" type="password" name="password" placeholder="Mật khẩu" required>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <button class="btn btn-primary px-4" type="submit">Đăng nhập</button>
+                                        </div>
+                                        <div class="col-6 text-end">
+                                            <a href="#" class="btn btn-link px-0">Quên mật khẩu?</a>
+                                        </div>
+                                    </div>
+                                </form>
+                                <!-- Kết thúc form đăng nhập -->
+
+                            </div>
+                        </div>
+                        <div class="card col-md-5 text-white bg-primary py-5">
+                            <div class="card-body text-center">
+                                <div>
+                                    <h2>Đăng ký</h2>
+                                    <p>Nếu bạn chưa có tài khoản, hãy đăng ký ngay.</p>
+                                    <a href="/register" class="btn btn-lg btn-outline-light mt-3">Đăng ký ngay!</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- CoreUI and necessary plugins -->
+    <script src="vendors/@coreui/coreui-pro/js/coreui.bundle.min.js"></script>
+    <script src="vendors/simplebar/js/simplebar.min.js"></script>
+</body>
+</html>

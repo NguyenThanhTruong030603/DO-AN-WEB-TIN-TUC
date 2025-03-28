@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết người dùng</title>
+</head>
+<body>
+    <h1>Chi tiết người dùng</h1>
+    <p><strong>Username:</strong> <%= user.username %></p>
+    <p><strong>Email:</strong> <%= user.email %></p>
+    <p><strong>Vai trò:</strong> <%= user.role %></p>
+    <p><strong>Ngày tạo:</strong> <%= new Date(user.createdAt).toLocaleDateString() %></p>
+    <a href="/">Quay lại danh sách</a>
+</body>
+</html>
