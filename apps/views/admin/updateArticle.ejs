@@ -1,13 +1,117 @@
 <!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sửa bài viết</title>
-</head>
-<body>
-    <h1>Sửa bài viết</h1>
-    <form action="/articles/edit/<%= article._id %>" method="POST">
+<html lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Kaiadmin - Bootstrap 5 Admin Dashboard</title>
+    <meta
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+      name="viewport"
+    />
+    <link
+      rel="icon"
+      href="/static/admin/assets/img/kaiadmin/favicon.ico"
+      type="image/x-icon"
+    />
+
+    <!-- Fonts and icons -->
+    <script src="/static/admin/assets/js/plugin/webfont/webfont.min.js"></script>
+    <script>
+      WebFont.load({
+        google: { families: ["Public Sans:300,400,500,600,700"] },
+        custom: {
+          families: [
+            "Font Awesome 5 Solid",
+            "Font Awesome 5 Regular",
+            "Font Awesome 5 Brands",
+            "simple-line-icons",
+          ],
+          urls: ["/static/admin/assets/css/fonts.min.css"],
+        },
+        active: function () {
+          sessionStorage.fonts = true;
+        },
+      });
+    </script>
+    <script src="https://cdn.tiny.cloud/1/775vsk249tgjs1p0p4wj08rqce8difgcnrm7q1i2falkiypg/tinymce/6/tinymce.min.js"
+    referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+        selector: '#content',
+        plugins: 'image link lists',
+        toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | link image',
+        menubar: false,
+        images_upload_url: '/upload-image', // API upload ảnh
+        automatic_uploads: true, // Tự động upload ảnh
+        images_upload_handler: function (blobInfo, success, failure) {
+            let formData = new FormData();
+            formData.append('upload', blobInfo.blob()); // Gửi file ảnh
+
+            fetch('/upload-image', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => success(data.url)) // Nhận URL và chèn vào bài viết
+                .catch(() => failure('Lỗi upload ảnh'));
+        }
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelector("form").addEventListener("submit", function (event) {
+            tinymce.triggerSave(); // Đồng bộ TinyMCE với textarea
+            let content = document.getElementById('content').value.trim();
+
+            if (!content) {
+                alert("Vui lòng nhập nội dung bài viết!"); // Hiển thị cảnh báo
+                event.preventDefault(); // Ngăn form gửi đi
+            }
+        });
+    });
+</script>
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="/static/admin/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/static/admin/assets/css/plugins.min.css" />
+    <link rel="stylesheet" href="/static/admin/assets/css/kaiadmin.min.css" />
+
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link rel="stylesheet" href="/static/admin/assets/css/demo.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <!-- Sidebar -->
+      <%- include('../partial/sidebar') %>
+      <!-- End Sidebar -->
+
+      <div class="main-panel">
+        <%- include('../partial/navbarheader') %>
+
+        <div class="container">
+          <div class="page-inner">
+            <div class="page-header">
+              <h4 class="page-title">Dashboard</h4>
+              <ul class="breadcrumbs">
+                <li class="nav-home">
+                  <a href="#">
+                    <i class="icon-home"></i>
+                  </a>
+                </li>
+                <li class="separator">
+                  <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                  <a href="#">Pages</a>
+                </li>
+                <li class="separator">
+                  <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                  <a href="#">Starter Page</a>
+                </li>
+              </ul>
+            </div>
+            <!-- PLACE CONTENT -->
+            <h1>Sửa bài viết</h1>
+    <form action="/articles/edit/<%= article._id %>" method="POST" enctype="multipart/form-data">
         <label for="title">Tiêu đề:</label>
         <input type="text" id="title" name="title" value="<%= article.title %>" required>
 
@@ -28,8 +132,85 @@
         <label for="content">Nội dung:</label>
         <textarea id="content" name="content" required><%= article.content %></textarea>
 
+        <label for="image">Ảnh bài viết:</label>
+        <input type="file" id="image" name="image">
+        <% if (article.image) { %>
+            <div>
+                <p>Ảnh hiện tại:</p>
+                <img src="<%= article.image %>" alt="Ảnh bài viết" width="200">
+            </div>
+        <% } %>
+
         <button type="submit">Lưu</button>
     </form>
     <a href="/articles">Quay lại danh sách</a>
-</body>
+    <!-- end content -->
+          </div>
+        </div>
+
+        <footer class="footer">
+          <div class="container-fluid d-flex justify-content-between">
+            <nav class="pull-left">
+              <ul class="nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="http://www.themekita.com">
+                    ThemeKita
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#"> Help </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#"> Licenses </a>
+                </li>
+              </ul>
+            </nav>
+            <div class="copyright">
+              2024, made with <i class="fa fa-heart heart text-danger"></i> by
+              <a href="http://www.themekita.com">ThemeKita</a>
+            </div>
+            <div>
+              Distributed by
+              <a target="_blank" href="https://themewagon.com/">ThemeWagon</a>.
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+    <!--   Core JS Files   -->
+    <script src="/static/admin/assets/js/core/jquery-3.7.1.min.js"></script>
+    <script src="/static/admin/assets/js/core/popper.min.js"></script>
+    <script src="/static/admin/assets/js/core/bootstrap.min.js"></script>
+
+    <!-- jQuery Scrollbar -->
+    <script src="/static/admin/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+
+    <!-- Chart JS -->
+    <script src="/static/admin/assets/js/plugin/chart.js/chart.min.js"></script>
+
+    <!-- jQuery Sparkline -->
+    <script src="/static/admin/assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
+
+    <!-- Chart Circle -->
+    <script src="/static/admin/assets/js/plugin/chart-circle/circles.min.js"></script>
+
+    <!-- Datatables -->
+    <script src="/static/admin/assets/js/plugin/datatables/datatables.min.js"></script>
+
+    <!-- Bootstrap Notify -->
+    <script src="/static/admin/assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+
+    <!-- jQuery Vector Maps -->
+    <script src="/static/admin/assets/js/plugin/jsvectormap/jsvectormap.min.js"></script>
+    <script src="/static/admin/assets/js/plugin/jsvectormap/world.js"></script>
+
+    <!-- Google Maps Plugin -->
+    <script src="/static/admin/assets/js/plugin/gmaps/gmaps.js"></script>
+
+    <!-- Sweet Alert -->
+    <script src="/static/admin/assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+
+    <!-- Kaiadmin JS -->
+    <script src="/static/admin/assets/js/kaiadmin.min.js"></script>
+  </body>
 </html>

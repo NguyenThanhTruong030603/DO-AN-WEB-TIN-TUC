@@ -37,9 +37,21 @@ const showAddArticleForm = async (req, res) => {
 // Thêm bài viết mới
 const createArticle = async (req, res) => {
     try {
-        const article = new Article(req.body);
+        let imagePath = "";
+        if (req.file) {
+            imagePath = `/uploads/${req.file.filename}`;
+        }
+
+        const article = new Article({
+            title: req.body.title,
+            content: req.body.content,
+            image: imagePath, // Lưu đường dẫn ảnh vào DB
+            author: req.body.author,
+            category: req.body.category
+        });
+
         await article.save();
-        res.redirect("articles"); // Chuyển hướng sau khi thêm thành công
+        res.redirect("/articles");
     } catch (error) {
         res.status(500).json({ message: "Lỗi tạo bài viết!", error });
     }
@@ -61,12 +73,31 @@ const showUpdateArticleForm = async (req, res) => {
 // Cập nhật bài viết
 const updateArticle = async (req, res) => {
     try {
-        await Article.findByIdAndUpdate(req.params.id, req.body);
-        res.redirect("/articles"); // Chuyển hướng sau khi cập nhật thành công
+        const existingArticle = await Article.findById(req.params.id);
+        if (!existingArticle) {
+            return res.status(404).json({ message: "Bài viết không tồn tại!" });
+        }
+
+        // Nếu có ảnh mới thì cập nhật, nếu không thì giữ nguyên
+        let imagePath = existingArticle.image;
+        if (req.file) {
+            imagePath = `/uploads/${req.file.filename}`;
+        }
+
+        await Article.findByIdAndUpdate(req.params.id, {
+            title: req.body.title,
+            content: req.body.content,
+            image: imagePath, // Cập nhật ảnh nếu có ảnh mới
+            author: req.body.author,
+            category: req.body.category
+        });
+
+        res.redirect("/articles");
     } catch (error) {
         res.status(500).json({ message: "Lỗi cập nhật bài viết!", error });
     }
 };
+
 
 // Xóa bài viết
 const deleteArticle = async (req, res) => {

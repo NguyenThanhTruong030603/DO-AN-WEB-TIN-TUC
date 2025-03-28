@@ -111,33 +111,33 @@
             </div>
             <!-- PLACE CONTENT -->
             <h1>Thêm bài viết</h1>
-            <form action="/articles/add" method="POST">
-                <label for="title">Tiêu đề:</label>
-                <input type="text" id="title" name="title" required>
-        
-                <label for="author">Tác giả:</label>
-                <select id="author" name="author" required>
-                    <% users.forEach(user=> { %>
-                        <option value="<%= user._id %>">
-                            <%= user.username %>
-                        </option>
-                        <% }) %>
-                </select>
-        
-                <label for="category">Danh mục:</label>
-                <select id="category" name="category" required>
-                    <% categories.forEach(category=> { %>
-                        <option value="<%= category._id %>">
-                            <%= category.name %>
-                        </option>
-                        <% }) %>
-                </select>
-        
-                <label for="content">Nội dung:</label>
-                <textarea id="content" name="content"></textarea> <!-- Bỏ `required` -->
-        
-                <button type="submit">Thêm bài viết</button>
-            </form>
+            <form action="/articles/add" method="POST" enctype="multipart/form-data">
+              <label for="title">Tiêu đề:</label>
+              <input type="text" name="title" required>
+          
+              <label for="content">Nội dung:</label>
+              <textarea id="content" name="content"></textarea>
+          
+              <label for="image">Ảnh bài viết:</label>
+              <input type="file" name="image">
+          
+              <label for="author">Tác giả:</label>
+              <select name="author">
+                  <% users.forEach(user => { %>
+                      <option value="<%= user._id %>"><%= user.username %></option>
+                  <% }); %>
+              </select>
+          
+              <label for="category">Danh mục:</label>
+              <select name="category">
+                  <% categories.forEach(category => { %>
+                      <option value="<%= category._id %>"><%= category.name %></option>
+                  <% }); %>
+              </select>
+          
+              <button type="submit">Thêm bài viết</button>
+          </form>
+            
             <a href="/articles">Quay lại danh sách</a>
     <!-- end content -->
           </div>

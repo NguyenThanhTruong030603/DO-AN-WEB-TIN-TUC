@@ -81,6 +81,7 @@
         <tr>
             <th>Tiêu đề</th>
             <th>Tác giả</th>
+            <th>Hình ảnh</th>
             <th>Danh mục</th>
             <th>Hành động</th>
         </tr>
@@ -88,6 +89,13 @@
             <tr>
                 <td><a href="/articles/<%= article._id %>"><%= article.title %></a></td>
                 <td><%= article.author ? article.author.username : "Không có" %></td>
+                <td>
+                  <% if (article.image) { %>
+                      <img src="<%= article.image %>" width="100">
+                  <% } else { %>
+                      Không có ảnh
+                  <% } %>
+              </td>
                 <td><%= article.category ? article.category.name : "Không có" %></td>
                 <td>
                     <a href="/articles/edit/<%= article._id %>">Sửa</a>

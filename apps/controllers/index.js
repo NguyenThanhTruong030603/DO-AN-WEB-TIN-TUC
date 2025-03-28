@@ -5,10 +5,20 @@ const categoryController = require("../controllers/categoryController");
 const articleController = require("../controllers/articleController");
 const userController = require("../controllers/userController");
 const authController = require("../controllers/authController");
-
+const multer = require("multer");
+const path = require("path");
 // Import Middleware
 const { isAuthenticated, isAdmin } = require("../middlewares/authMiddleware");
-
+// Cấu hình Multer để upload ảnh
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, "public/uploads/");
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname));
+    }
+});
+const upload = multer({ storage: storage });
 // =========================
 // Routes cho Category
 // =========================
@@ -25,10 +35,10 @@ router.post("/categories/delete/:id", isAdmin, categoryController.deleteCategory
 router.get("/articles", isAuthenticated, articleController.getAllArticles);
 
 router.get("/articles/add", isAuthenticated, articleController.showAddArticleForm);
-router.post("/articles/add", isAuthenticated, articleController.createArticle);
+router.post("/articles/add", upload.single("image"), articleController.createArticle);
 router.get("/articles/:id", isAuthenticated, articleController.getArticleById);
 router.get("/articles/edit/:id", isAuthenticated, articleController.showUpdateArticleForm);
-router.post("/articles/edit/:id", isAuthenticated, articleController.updateArticle);
+router.post("/articles/edit/:id", isAuthenticated,upload.single("image"), articleController.updateArticle);
 router.post("/articles/delete/:id", isAdmin, articleController.deleteArticle);
 // Routes cho Authentication
 // =========================
