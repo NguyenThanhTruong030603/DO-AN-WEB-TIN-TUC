@@ -2,12 +2,21 @@
   "name": "lap1",
   "version": "1.0.0",
   "description": "",
+  "homepage": "https://github.com/NguyenThanhTruong030603/DO-AN-WEB-TIN-TUC#readme",
+  "bugs": {
+    "url": "https://github.com/NguyenThanhTruong030603/DO-AN-WEB-TIN-TUC/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NguyenThanhTruong030603/DO-AN-WEB-TIN-TUC.git"
+  },
+  "license": "ISC",
+  "author": "toannguyen",
+  "type": "commonjs",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "toannguyen",
-  "license": "ISC",
   "dependencies": {
     "bcryptjs": "^3.0.2",
     "body-parser": "^1.20.3",
@@ -18,5 +27,6 @@
     "express-session": "^1.18.1",
     "mongoose": "^8.13.0",
     "multer": "^1.4.5-lts.2"
-  }
+  },
+  "devDependencies": {}
 }

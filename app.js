@@ -11,7 +11,7 @@ const multer = require("multer");
 const path = require("path");
 
 // Kết nối tới MongoDB
-mongoose.connect("mongodb+srv://truongleu7:DCh5g762mXSjMru8@cluster0.tfv6c.mongodb.net/TinTucDB?retryWrites=true&w=majority&appName=Cluster0", {
+mongoose.connect("mongodb+srv://truongleu7:123123123@cluster0.tfv6c.mongodb.net/TinTucDB?retryWrites=true&w=majority&appName=Cluster0", {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
@@ -22,7 +22,7 @@ app.use(session({
     secret: "AHEKTDMBBCLRNT123", // Thay bằng secret thực tế
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({ mongoUrl: "mongodb+srv://truongleu7:DCh5g762mXSjMru8@cluster0.tfv6c.mongodb.net/TinTucDB?retryWrites=true&w=majority&appName=Cluster0" }),
+    store: MongoStore.create({ mongoUrl: "mongodb+srv://truongleu7:123123123@cluster0.tfv6c.mongodb.net/TinTucDB?retryWrites=true&w=majority&appName=Cluster0" }),
     cookie: { maxAge: 1000 * 60 * 60 * 24 } // 1 ngày
 }));
 
