@@ -4,7 +4,7 @@ const Category = require("../models/Category");
 const getAllCategories = async (req, res) => {
     try {
         const categories = await Category.find();
-        res.render("category", { categories });
+        res.render("admin/category", { categories });
     } catch (error) {
         res.status(500).json({ message: "Lỗi lấy danh mục!", error });
     }
@@ -12,7 +12,7 @@ const getAllCategories = async (req, res) => {
 
 // Hiển thị form thêm danh mục
 const showAddCategoryForm = (req, res) => {
-    res.render("categoryAdd");
+    res.render("admin/categoryAdd");
 };
 
 // Thêm danh mục mới
@@ -31,7 +31,7 @@ const showUpdateCategoryForm = async (req, res) => {
     try {
         const category = await Category.findById(req.params.id);
         if (!category) return res.status(404).json({ message: "Không tìm thấy danh mục!" });
-        res.render("categoryEdit", { category });
+        res.render("admin/categoryEdit", { category });
     } catch (error) {
         res.status(500).json({ message: "Lỗi lấy danh mục!", error });
     }

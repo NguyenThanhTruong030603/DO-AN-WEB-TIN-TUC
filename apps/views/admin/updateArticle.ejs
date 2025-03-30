@@ -111,7 +111,7 @@
             </div>
             <!-- PLACE CONTENT -->
             <h1>Sửa bài viết</h1>
-    <form action="/articles/edit/<%= article._id %>" method="POST" enctype="multipart/form-data">
+    <form action="/admin/articles/edit/<%= article._id %>" method="POST" enctype="multipart/form-data">
         <label for="title">Tiêu đề:</label>
         <input type="text" id="title" name="title" value="<%= article.title %>" required>
 
@@ -143,7 +143,7 @@
 
         <button type="submit">Lưu</button>
     </form>
-    <a href="/articles">Quay lại danh sách</a>
+    <a href="/admin/articles">Quay lại danh sách</a>
     <!-- end content -->
           </div>
         </div>

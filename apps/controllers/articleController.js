@@ -51,7 +51,7 @@ const createArticle = async (req, res) => {
         });
 
         await article.save();
-        res.redirect("/articles");
+        res.redirect("/admin/articles");
     } catch (error) {
         res.status(500).json({ message: "Lỗi tạo bài viết!", error });
     }
@@ -92,7 +92,7 @@ const updateArticle = async (req, res) => {
             category: req.body.category
         });
 
-        res.redirect("/articles");
+        res.redirect("/admin/articles");
     } catch (error) {
         res.status(500).json({ message: "Lỗi cập nhật bài viết!", error });
     }
@@ -103,7 +103,7 @@ const updateArticle = async (req, res) => {
 const deleteArticle = async (req, res) => {
     try {
         await Article.findByIdAndDelete(req.params.id);
-        res.redirect("/articles"); // Chuyển hướng sau khi xóa thành công
+        res.redirect("/admin/articles"); // Chuyển hướng sau khi xóa thành công
     } catch (error) {
         res.status(500).json({ message: "Lỗi xóa bài viết!", error });
     }

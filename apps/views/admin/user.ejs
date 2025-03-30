@@ -75,32 +75,24 @@
               </ul>
             </div>
             <!-- PLACE CONTENT -->
-            <h1>Danh sách bài viết</h1>
-    <a href="/admin/articles/add">Thêm bài viết</a>
+            <h1>Danh sách người dùng</h1>
+    <a href="/admin/user/add">Thêm người dùng</a>
     <table border="1">
         <tr>
-            <th>Tiêu đề</th>
-            <th>Tác giả</th>
-            <th>Hình ảnh</th>
-            <th>Danh mục</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Vai trò</th>
             <th>Hành động</th>
         </tr>
-        <% articles.forEach(article => { %>
+        <% users.forEach(user => { %>
             <tr>
-                <td><a href="/admin/articles/<%= article._id %>"><%= article.title %></a></td>
-                <td><%= article.author ? article.author.username : "Không có" %></td>
+                <td><%= user.username %></td>
+                <td><%= user.email %></td>
+                <td><%= user.role %></td>
                 <td>
-                  <% if (article.image) { %>
-                      <img src="<%= article.image %>" width="100">
-                  <% } else { %>
-                      Không có ảnh
-                  <% } %>
-              </td>
-                <td><%= article.category ? article.category.name : "Không có" %></td>
-                <td>
-                    <a href="/admin/articles/edit/<%= article._id %>">Sửa</a>
-                    <form action="/admin/articles/delete/<%= article._id %>" method="POST" style="display:inline;">
-                        <button type="submit" onclick="return confirm('Bạn có chắc chắn muốn xóa bài viết này?')">Xóa</button>
+                    <a href="/admin/user/edit/<%= user._id %>">Sửa</a>
+                    <form action="/admin/user/delete/<%= user._id %>" method="POST" style="display:inline;">
+                        <button type="submit" onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng này?')">Xóa</button>
                     </form>
                 </td>
             </tr>

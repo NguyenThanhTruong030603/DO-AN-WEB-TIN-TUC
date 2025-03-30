@@ -75,37 +75,25 @@
               </ul>
             </div>
             <!-- PLACE CONTENT -->
-            <h1>Danh sách bài viết</h1>
-    <a href="/admin/articles/add">Thêm bài viết</a>
-    <table border="1">
-        <tr>
-            <th>Tiêu đề</th>
-            <th>Tác giả</th>
-            <th>Hình ảnh</th>
-            <th>Danh mục</th>
-            <th>Hành động</th>
-        </tr>
-        <% articles.forEach(article => { %>
-            <tr>
-                <td><a href="/admin/articles/<%= article._id %>"><%= article.title %></a></td>
-                <td><%= article.author ? article.author.username : "Không có" %></td>
-                <td>
-                  <% if (article.image) { %>
-                      <img src="<%= article.image %>" width="100">
-                  <% } else { %>
-                      Không có ảnh
-                  <% } %>
-              </td>
-                <td><%= article.category ? article.category.name : "Không có" %></td>
-                <td>
-                    <a href="/admin/articles/edit/<%= article._id %>">Sửa</a>
-                    <form action="/admin/articles/delete/<%= article._id %>" method="POST" style="display:inline;">
-                        <button type="submit" onclick="return confirm('Bạn có chắc chắn muốn xóa bài viết này?')">Xóa</button>
-                    </form>
-                </td>
-            </tr>
-        <% }) %>
-    </table>
+            <h1>Danh sách danh mục</h1>
+            <a href="/categories/add">Thêm danh mục</a>
+            <table border="1">
+                <tr>
+                    <th>Tên danh mục</th>
+                    <th>Hành động</th>
+                </tr>
+                <% categories.forEach(category => { %>
+                    <tr>
+                        <td><%= category.name %></td>
+                        <td>
+                            <a href="/categories/edit/<%= category._id %>">Sửa</a>
+                            <form action="/categories/delete/<%= category._id %>" method="POST" style="display:inline;">
+                                <button type="submit" onclick="return confirm('Bạn có chắc chắn muốn xóa danh mục này?')">Xóa</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            </table>
     <!-- end content -->
           </div>
         </div>

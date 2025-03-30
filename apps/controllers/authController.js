@@ -1,40 +1,45 @@
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 const User = require("../models/User");
+
+exports.showLoginForm = (req, res) => {
+    res.render("login.ejs");
+};
 
 exports.login = async (req, res) => {
     try {
+         
         const { username, password } = req.body;
 
-        console.log("Session trước khi lưu:", req.session); // ✅ Kiểm tra session
+        if (!username || !password) {
+            return res.render("login", { error: "Vui lòng nhập đủ thông tin!" });
+        }
 
         const user = await User.findOne({ username });
         if (!user || !(await user.comparePassword(password))) {
-            return res.status(401).send("Tên đăng nhập hoặc mật khẩu không đúng!");
+            return res.render("login", { error: "Sai tên đăng nhập hoặc mật khẩu!" });
         }
 
-        // ✅ Kiểm tra req.session đã tồn tại
-        if (!req.session) {
-            console.error("❌ req.session chưa được khởi tạo!");
-            return res.status(500).json({ message: "Lỗi session!" });
-        }
-
-        // Lưu user vào session
-        req.session.user = { id: user._id, username: user.username, role: user.role };
+        const token = jwt.sign(
+            { id: user._id, username: user.username, role: user.role },
+            "NGUYENTHANHTRUONG333",
+            { expiresIn: "1h" }
+        );
         
-        // console.log("Session sau khi lưu:", req.session); // ✅ Kiểm tra lại session
-
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: false, // Để test trên localhost, nếu deploy thì đặt thành true
+            sameSite: "Lax"
+        });
         res.redirect("/articles");
     } catch (error) {
         console.error("Lỗi khi đăng nhập:", error);
-        res.status(500).json({ message: "Lỗi đăng nhập!", error: error.message });
+        res.status(500).json({ message: "Lỗi đăng nhập!" });
     }
 };
 
 
-
 exports.logout = (req, res) => {
-    req.session.destroy(() => {
-        res.redirect("/login");
-    });
+    res.clearCookie("token");
+    res.redirect("/login");
 };
-
-

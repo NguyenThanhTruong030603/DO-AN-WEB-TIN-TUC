@@ -3,6 +3,7 @@ var mongoose = require("mongoose"); // Import mongoose
 var app = express();
 app.use(express.urlencoded({ extended: true })); // Cho phép đọc dữ liệu từ form HTML
 app.use(express.json());
+const cookieParser = require("cookie-parser");
 var controller = require(__dirname + "/apps/controllers");
 
 const session = require("express-session");
@@ -17,7 +18,7 @@ mongoose.connect("mongodb+srv://truongleu7:123123123@cluster0.tfv6c.mongodb.net/
 })
 .then(() => console.log("✅ Kết nối MongoDB thành công"))
 .catch(err => console.error("❌ Lỗi kết nối MongoDB:", err));
-
+app.use(cookieParser())
 app.use(session({
     secret: "AHEKTDMBBCLRNT123", // Thay bằng secret thực tế
     resave: false,
@@ -25,7 +26,7 @@ app.use(session({
     store: MongoStore.create({ mongoUrl: "mongodb+srv://truongleu7:123123123@cluster0.tfv6c.mongodb.net/TinTucDB?retryWrites=true&w=majority&appName=Cluster0" }),
     cookie: { maxAge: 1000 * 60 * 60 * 24 } // 1 ngày
 }));
-
+app.use(cookieParser());
 app.set("views", __dirname + "/apps/views");
 app.set("view engine", "ejs");
 app.use("/static", express.static(__dirname + "/public"));

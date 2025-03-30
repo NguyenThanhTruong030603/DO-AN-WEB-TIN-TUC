@@ -1,15 +1,28 @@
-module.exports = {
-    isAuthenticated: (req, res, next) => {
-        if (req.session.user) {
-            return next(); // Cho phép truy cập nếu đã đăng nhập
-        }
-        res.redirect("/login"); // Chưa đăng nhập, chuyển hướng về trang đăng nhập
-    },
+const jwt = require("jsonwebtoken");
 
-    isAdmin: (req, res, next) => {
-        if (req.session.user && req.session.user.role === "admin") {
-            return next(); // Chỉ admin mới có thể tiếp tục
-        }
-        res.status(403).send("Bạn không có quyền truy cập!");
+exports.isAuthenticated = (req, res, next) => {
+    
+    const token = req.cookies.token;
+
+    if (!token) {
+        console.log("❌ Không tìm thấy token!");
+        return res.redirect("/login");
     }
+
+    try {
+        const decoded = jwt.verify(token, "NGUYENTHANHTRUONG333");
+        req.user = decoded;
+        
+        next();
+    } catch (error) {
+        console.log("❌ Token không hợp lệ!", error);
+        return res.redirect("/login");
+    }
+};
+
+exports.isAdmin = (req, res, next) => {
+    if (!req.user || req.user.role !== "admin") {
+        return res.status(403).json({ message: "Bạn không có quyền truy cập!" });
+    }
+    next();
 };
