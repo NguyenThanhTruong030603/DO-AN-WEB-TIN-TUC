@@ -19,6 +19,10 @@
                     <% if (user) { %>
                         <span>Xin chào, <%= user.username %>!</span>
                         <a href="/logout" class="btn btn-primary">Đăng xuất</a>
+                        <% if (user.role === "admin") { %>
+                            <a href="/admin" class="btn btn-danger">Admin</a>
+                        <% } %>
+                        
                     <% } else { %>
                         <a href="/login" class="btn btn-primary">Đăng nhập</a>
                         <a href="/register" class="btn btn-secondary">Đăng ký</a>
