@@ -31,7 +31,7 @@ exports.login = async (req, res) => {
             secure: false, // Để test trên localhost, nếu deploy thì đặt thành true
             sameSite: "Lax"
         });
-        res.redirect("/articles");
+        res.redirect("/");
     } catch (error) {
         console.error("Lỗi khi đăng nhập:", error);
         res.status(500).json({ message: "Lỗi đăng nhập!" });
@@ -41,5 +41,5 @@ exports.login = async (req, res) => {
 
 exports.logout = (req, res) => {
     res.clearCookie("token");
-    res.redirect("/login");
+    res.redirect("/");
 };

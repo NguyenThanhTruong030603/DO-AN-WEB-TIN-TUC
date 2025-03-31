@@ -75,13 +75,24 @@
               </ul>
             </div>
             <!-- PLACE CONTENT -->
-            <h1>Thêm danh mục</h1>
-            <form action="/categories/add" method="POST">
-                <label for="name">Tên danh mục:</label>
-                <input type="text" id="name" name="name" required>
-                <button type="submit">Thêm</button>
-            </form>
-            <a href="/categories">Quay lại danh sách</a>
+            <div class="container mt-4">
+              <h1 class="text-center mb-4">📂 Thêm danh mục</h1>
+          
+              <form action="/admin/categories/add" method="POST" class="card p-4 shadow-lg">
+                  <!-- Tên danh mục -->
+                  <div class="mb-3">
+                      <label for="name" class="form-label fw-bold">📌 Tên danh mục:</label>
+                      <input type="text" id="name" name="name" class="form-control" placeholder="Nhập tên danh mục" required>
+                  </div>
+          
+                  <!-- Nút Thêm -->
+                  <div class="text-center mt-4">
+                      <button type="submit" class="btn btn-success">✅ Thêm danh mục</button>
+                      <a href="/admin/categories" class="btn btn-secondary ms-2">⬅ Quay lại danh sách</a>
+                  </div>
+              </form>
+          </div>
+          
     <!-- end content -->
           </div>
         </div>

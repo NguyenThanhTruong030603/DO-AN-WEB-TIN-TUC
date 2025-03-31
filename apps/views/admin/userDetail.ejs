@@ -75,12 +75,23 @@
               </ul>
             </div>
             <!-- PLACE CONTENT -->
-            <h1>Chi tiết người dùng</h1>
-    <p><strong>Username:</strong> <%= user.username %></p>
-    <p><strong>Email:</strong> <%= user.email %></p>
-    <p><strong>Vai trò:</strong> <%= user.role %></p>
-    <p><strong>Ngày tạo:</strong> <%= new Date(user.createdAt).toLocaleDateString() %></p>
-    <a href="/">Quay lại danh sách</a>
+            <div class="container mt-5">
+              <div class="card shadow p-4">
+                  <h1 class="text-center mb-4">👤 Chi tiết người dùng</h1>
+          
+                  <ul class="list-group">
+                      <li class="list-group-item"><strong>👤 Username:</strong> <%= user.username %></li>
+                      <li class="list-group-item"><strong>📧 Email:</strong> <%= user.email %></li>
+                      <li class="list-group-item"><strong>🎭 Vai trò:</strong> <%= user.role %></li>
+                      
+                  </ul>
+          
+                  <div class="text-center mt-4">
+                      <a href="/admin/user" class="btn btn-secondary">⬅ Quay lại danh sách</a>
+                  </div>
+              </div>
+          </div>
+          
     <!-- end content -->
           </div>
         </div>

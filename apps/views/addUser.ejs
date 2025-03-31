@@ -2,30 +2,74 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thêm người dùng</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Đăng ký</title>
+    <link rel="stylesheet" href="/static/admin/css/style.css">
+    <script>
+        function validateForm(event) {
+            event.preventDefault(); // Ngăn chặn form gửi ngay lập tức
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirm_password").value;
+            var errorText = document.getElementById("error_message");
+
+            if (password !== confirmPassword) {
+                errorText.textContent = "Mật khẩu không trùng khớp!";
+                errorText.style.display = "block";
+                return false;
+            }
+            event.target.submit(); // Nếu đúng, gửi form
+        }
+    </script>
 </head>
 <body>
-    <h1>Thêm người dùng</h1>
-    <form action="/add" method="POST">
-        <label for="username">Tên đăng nhập:</label>
-        <input type="text" id="username" name="username" required>
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
+    <div class="min-vh-100 d-flex flex-row align-items-center">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card p-4 shadow-lg">
+                        <div class="card-body">
+                            <h2 class="text-center">Đăng ký</h2>
 
-        <label for="password">Mật khẩu:</label>
-        <input type="password" id="password" name="password" required>
+                            <% if (typeof error !== "undefined" && error) { %>
+                                <p class="text-danger text-center"><%= error %></p>
+                            <% } %>
 
-        <label for="role">Vai trò:</label>
-        <select id="role" name="role" required>
-            <option value="reader">Reader</option>
-            <option value="author">Author</option>
-            <option value="admin">Admin</option>
-        </select>
+                            <p id="error_message" class="text-danger text-center" style="display: none;"></p>
 
-        <button type="submit">Thêm người dùng</button>
-    </form>
-    <a href="/">Quay lại danh sách</a>
+                            <form action="/register/add" method="POST" onsubmit="return validateForm(event)">
+                                <div class="mb-3">
+                                    <label for="username" class="form-label">Tên đăng nhập</label>
+                                    <input type="text" id="username" name="username" class="form-control" placeholder="Nhập tên đăng nhập" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" id="email" name="email" class="form-control" placeholder="Nhập email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Mật khẩu</label>
+                                    <input type="password" id="password" name="password" class="form-control" placeholder="Nhập mật khẩu" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="confirm_password" class="form-label">Xác nhận mật khẩu</label>
+                                    <input type="password" id="confirm_password" name="confirm_password" class="form-control" placeholder="Nhập lại mật khẩu" required>
+                                </div>
+                                
+                                <!-- Ẩn role và đặt mặc định là 'reader' -->
+                                <input type="hidden" name="role" value="reader">
+
+                                <button type="submit" class="btn btn-primary w-100">Đăng ký</button>
+                            </form>
+
+                            <div class="text-center mt-3">
+                                <a href="/" class="text-decoration-none">Quay về trang chủ</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>

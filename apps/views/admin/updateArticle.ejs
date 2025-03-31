@@ -110,40 +110,67 @@
               </ul>
             </div>
             <!-- PLACE CONTENT -->
-            <h1>Sửa bài viết</h1>
-    <form action="/admin/articles/edit/<%= article._id %>" method="POST" enctype="multipart/form-data">
-        <label for="title">Tiêu đề:</label>
-        <input type="text" id="title" name="title" value="<%= article.title %>" required>
-
-        <label for="author">Tác giả:</label>
-        <select id="author" name="author" required>
-            <% users.forEach(user => { %>
-                <option value="<%= user._id %>" <%= article.author && article.author._id.toString() === user._id.toString() ? "selected" : "" %>><%= user.username %></option>
-            <% }) %>
-        </select>
-
-        <label for="category">Danh mục:</label>
-        <select id="category" name="category" required>
-            <% categories.forEach(category => { %>
-                <option value="<%= category._id %>" <%= article.category && article.category._id.toString() === category._id.toString() ? "selected" : "" %>><%= category.name %></option>
-            <% }) %>
-        </select>
-
-        <label for="content">Nội dung:</label>
-        <textarea id="content" name="content" required><%= article.content %></textarea>
-
-        <label for="image">Ảnh bài viết:</label>
-        <input type="file" id="image" name="image">
-        <% if (article.image) { %>
-            <div>
-                <p>Ảnh hiện tại:</p>
-                <img src="<%= article.image %>" alt="Ảnh bài viết" width="200">
-            </div>
-        <% } %>
-
-        <button type="submit">Lưu</button>
-    </form>
-    <a href="/admin/articles">Quay lại danh sách</a>
+            <div class="container mt-4">
+              <h1 class="text-center mb-4">✏ Sửa bài viết</h1>
+          
+              <form action="/admin/articles/edit/<%= article._id %>" method="POST" enctype="multipart/form-data" class="card p-4 shadow-lg">
+                  <!-- Tiêu đề -->
+                  <div class="mb-3">
+                      <label for="title" class="form-label fw-bold">📝 Tiêu đề:</label>
+                      <input type="text" id="title" name="title" value="<%= article.title %>" class="form-control" required>
+                  </div>
+          
+                  <!-- Tác giả -->
+                  <div class="mb-3">
+                      <label for="author" class="form-label fw-bold">✍️ Tác giả:</label>
+                      <select id="author" name="author" class="form-select" required>
+                          <% users.forEach(user => { %>
+                              <option value="<%= user._id %>" <%= article.author && article.author._id.toString() === user._id.toString() ? "selected" : "" %>>
+                                  <%= user.username %>
+                              </option>
+                          <% }) %>
+                      </select>
+                  </div>
+          
+                  <!-- Danh mục -->
+                  <div class="mb-3">
+                      <label for="category" class="form-label fw-bold">📂 Danh mục:</label>
+                      <select id="category" name="category" class="form-select" required>
+                          <% categories.forEach(category => { %>
+                              <option value="<%= category._id %>" <%= article.category && article.category._id.toString() === category._id.toString() ? "selected" : "" %>>
+                                  <%= category.name %>
+                              </option>
+                          <% }) %>
+                      </select>
+                  </div>
+          
+                  <!-- Nội dung -->
+                  <div class="mb-3">
+                      <label for="content" class="form-label fw-bold">📝 Nội dung:</label>
+                      <textarea id="content" name="content" class="form-control" rows="6" required><%= article.content %></textarea>
+                  </div>
+          
+                  <!-- Ảnh bài viết -->
+                  <div class="mb-3">
+                      <label for="image" class="form-label fw-bold">📷 Ảnh bài viết:</label>
+                      <input type="file" id="image" name="image" class="form-control">
+                  </div>
+          
+                  <% if (article.image) { %>
+                      <div class="mb-3 text-center">
+                          <p class="fw-bold">Ảnh hiện tại:</p>
+                          <img src="<%= article.image %>" alt="Ảnh bài viết" class="img-fluid rounded shadow" width="200">
+                      </div>
+                  <% } %>
+          
+                  <!-- Nút lưu -->
+                  <div class="text-center mt-4">
+                      <button type="submit" class="btn btn-primary">💾 Lưu bài viết</button>
+                      <a href="/admin/articles" class="btn btn-secondary ms-2">⬅ Quay lại danh sách</a>
+                  </div>
+              </form>
+          </div>
+          
     <!-- end content -->
           </div>
         </div>

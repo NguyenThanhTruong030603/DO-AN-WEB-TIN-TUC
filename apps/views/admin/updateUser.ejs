@@ -75,24 +75,38 @@
               </ul>
             </div>
             <!-- PLACE CONTENT -->
-            <h1>Sửa người dùng</h1>
-            <form action="/admin/user/edit/<%= user._id %>" method="POST">
-                <label for="username">Tên đăng nhập:</label>
-                <input type="text" id="username" name="username" value="<%= user.username %>" required>
-        
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" value="<%= user.email %>" required>
-        
-                <label for="role">Vai trò:</label>
-                <select id="role" name="role" required>
-                    <option value="reader" <%= user.role === "reader" ? "selected" : "" %>>Reader</option>
-                    <option value="author" <%= user.role === "author" ? "selected" : "" %>>Author</option>
-                    <option value="admin" <%= user.role === "admin" ? "selected" : "" %>>Admin</option>
-                </select>
-        
-                <button type="submit">Lưu</button>
-            </form>
-            <a href="/admin/user">Quay lại danh sách</a>
+            <div class="container mt-5">
+              <div class="card shadow p-4">
+                  <h1 class="text-center mb-4">✏️ Sửa người dùng</h1>
+          
+                  <form action="/admin/user/edit/<%= user._id %>" method="POST">
+                      <div class="mb-3">
+                          <label for="username" class="form-label">👤 Tên đăng nhập:</label>
+                          <input type="text" id="username" name="username" class="form-control" value="<%= user.username %>" required>
+                      </div>
+          
+                      <div class="mb-3">
+                          <label for="email" class="form-label">📧 Email:</label>
+                          <input type="email" id="email" name="email" class="form-control" value="<%= user.email %>" required>
+                      </div>
+          
+                      <div class="mb-3">
+                          <label for="role" class="form-label">🎭 Vai trò:</label>
+                          <select id="role" name="role" class="form-select" required>
+                              <option value="reader" <%= user.role === "reader" ? "selected" : "" %>>📖 Reader</option>
+                              <option value="author" <%= user.role === "author" ? "selected" : "" %>>✍️ Author</option>
+                              <option value="admin" <%= user.role === "admin" ? "selected" : "" %>>🛠 Admin</option>
+                          </select>
+                      </div>
+          
+                      <div class="d-flex justify-content-between">
+                          <a href="/admin/user" class="btn btn-secondary">⬅ Quay lại</a>
+                          <button type="submit" class="btn btn-success">💾 Lưu</button>
+                      </div>
+                  </form>
+              </div>
+          </div>
+          
     <!-- end content -->
           </div>
         </div>

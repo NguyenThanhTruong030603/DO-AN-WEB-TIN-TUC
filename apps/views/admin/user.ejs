@@ -75,29 +75,47 @@
               </ul>
             </div>
             <!-- PLACE CONTENT -->
-            <h1>Danh sách người dùng</h1>
-    <a href="/admin/user/add">Thêm người dùng</a>
-    <table border="1">
-        <tr>
-            <th>Username</th>
-            <th>Email</th>
-            <th>Vai trò</th>
-            <th>Hành động</th>
-        </tr>
-        <% users.forEach(user => { %>
-            <tr>
-                <td><%= user.username %></td>
-                <td><%= user.email %></td>
-                <td><%= user.role %></td>
-                <td>
-                    <a href="/admin/user/edit/<%= user._id %>">Sửa</a>
-                    <form action="/admin/user/delete/<%= user._id %>" method="POST" style="display:inline;">
-                        <button type="submit" onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng này?')">Xóa</button>
-                    </form>
-                </td>
-            </tr>
-        <% }) %>
-    </table>
+            <div class="container mt-5">
+              <div class="card shadow p-4">
+                  <h1 class="text-center mb-4">📋 Danh sách người dùng</h1>
+          
+                  <div class="d-flex justify-content-between mb-3">
+                      <a href="/admin/user/add" class="btn btn-primary">➕ Thêm người dùng</a>
+                  </div>
+          
+                  <table class="table table-striped table-hover text-center">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>👤 Username</th>
+                            <th>📧 Email</th>
+                            <th>🎭 Vai trò</th>
+                            <th>⚙ Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% users.forEach(user => { %>
+                            <tr>
+                                <td>
+                                    <a href="/admin/user/<%= user._id %>" class="text-decoration-none text-dark">
+                                        <%= user.username %>
+                                    </a>
+                                </td>
+                                <td><%= user.email %></td>
+                                <td><span class="badge bg-info text-dark"><%= user.role %></span></td>
+                                <td>
+                                    <a href="/admin/user/edit/<%= user._id %>" class="btn btn-warning btn-sm">✏ Sửa</a>
+                                    <form action="/admin/user/delete/<%= user._id %>" method="POST" class="d-inline">
+                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng này?')">🗑 Xóa</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+                
+              </div>
+          </div>
+          
     <!-- end content -->
           </div>
         </div>

@@ -2,18 +2,46 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Đăng nhập</title>
+    <link rel="stylesheet" href="/static/admin/css/style.css">
 </head>
 <body>
-    <h2>Đăng nhập</h2>
-    <% if (typeof error !== "undefined" && error) { %>
-        <p style="color: red;"><%= error %></p>
-    <% } %>
-    <form action="/login" method="POST">
-        <input type="text" name="username" placeholder="Tên đăng nhập" required>
-        <input type="password" name="password" placeholder="Mật khẩu" required>
-        <button type="submit">Đăng nhập</button>
-    </form>
+    
+    <div class="min-vh-100 d-flex flex-row align-items-center">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card p-4 shadow-lg">
+                        <div class="card-body">
+                            <h2 class="text-center">Đăng nhập</h2>
+                            
+                            <% if (typeof error !== "undefined" && error) { %>
+                                <p class="text-danger text-center"><%= error %></p>
+                            <% } %>
+
+                            <form action="/login" method="POST">
+                                <div class="mb-3">
+                                    <label for="username" class="form-label">Tên đăng nhập</label>
+                                    <input type="text" id="username" name="username" class="form-control" placeholder="Nhập tên đăng nhập" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Mật khẩu</label>
+                                    <input type="password" id="password" name="password" class="form-control" placeholder="Nhập mật khẩu" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100">Đăng nhập</button>
+                            </form>
+
+                            <div class="text-center mt-3">
+                                <a href="#" class="text-decoration-none">Quên mật khẩu?</a>
+                            </div>
+                            <a href="/" class="back-link">Quay về trang chủ</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
 </body>
 </html>

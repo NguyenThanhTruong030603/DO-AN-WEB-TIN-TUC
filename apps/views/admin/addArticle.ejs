@@ -110,35 +110,55 @@
               </ul>
             </div>
             <!-- PLACE CONTENT -->
-            <h1>Thêm bài viết</h1>
-            <form action="/admin/articles/add" method="POST" enctype="multipart/form-data">
-              <label for="title">Tiêu đề:</label>
-              <input type="text" name="title" required>
-          
-              <label for="content">Nội dung:</label>
-              <textarea id="content" name="content"></textarea>
-          
-              <label for="image">Ảnh bài viết:</label>
-              <input type="file" name="image">
-          
-              <label for="author">Tác giả:</label>
-              <select name="author">
-                  <% users.forEach(user => { %>
-                      <option value="<%= user._id %>"><%= user.username %></option>
-                  <% }); %>
-              </select>
-          
-              <label for="category">Danh mục:</label>
-              <select name="category">
-                  <% categories.forEach(category => { %>
-                      <option value="<%= category._id %>"><%= category.name %></option>
-                  <% }); %>
-              </select>
-          
-              <button type="submit">Thêm bài viết</button>
-          </form>
-            
-            <a href="/admin/articles">Quay lại danh sách</a>
+            <h1 class="text-center my-4">Thêm bài viết</h1>
+
+<div class="container">
+    <div class="card shadow-lg p-4">
+        <form action="/admin/articles/add" method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="title" class="form-label">Tiêu đề:</label>
+                <input type="text" name="title" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="content" class="form-label">Nội dung:</label>
+                <textarea id="content" name="content" class="form-control" rows="5"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="image" class="form-label">Ảnh bài viết:</label>
+                <input type="file" name="image" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label for="author" class="form-label">Tác giả:</label>
+                <select name="author" class="form-select">
+                    <% users.forEach(user => { %>
+                        <option value="<%= user._id %>"><%= user.username %></option>
+                    <% }); %>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="category" class="form-label">Danh mục:</label>
+                <select name="category" class="form-select">
+                    <% categories.forEach(category => { %>
+                        <option value="<%= category._id %>"><%= category.name %></option>
+                    <% }); %>
+                </select>
+            </div>
+
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Thêm bài viết</button>
+            </div>
+        </form>
+
+        <div class="text-center mt-3">
+            <a href="/admin/articles" class="btn btn-secondary">Quay lại danh sách</a>
+        </div>
+    </div>
+</div>
+
     <!-- end content -->
           </div>
         </div>

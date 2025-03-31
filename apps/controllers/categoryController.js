@@ -20,7 +20,7 @@ const createCategory = async (req, res) => {
     try {
         const category = new Category(req.body);
         await category.save();
-        res.redirect("/categories");
+        res.redirect("/admin/categories");
     } catch (error) {
         res.status(400).json({ message: "Lỗi tạo danh mục!", error });
     }
@@ -41,7 +41,7 @@ const showUpdateCategoryForm = async (req, res) => {
 const updateCategory = async (req, res) => {
     try {
         await Category.findByIdAndUpdate(req.params.id, req.body);
-        res.redirect("/categories");
+        res.redirect("/admin/categories");
     } catch (error) {
         res.status(400).json({ message: "Lỗi cập nhật danh mục!", error });
     }
@@ -51,7 +51,7 @@ const updateCategory = async (req, res) => {
 const deleteCategory = async (req, res) => {
     try {
         await Category.findByIdAndDelete(req.params.id);
-        res.redirect("/categories");
+        res.redirect("/admin/categories");
     } catch (error) {
         res.status(500).json({ message: "Lỗi xóa danh mục!", error });
     }
