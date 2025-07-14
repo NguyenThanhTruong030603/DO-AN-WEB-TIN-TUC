@@ -1,0 +1,14 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 22
+    commands:
+      - npm install
+  build:
+    commands:
+      - npm test  # Dừng nếu test fail
+artifacts:
+  files:
+    - '**/*'
