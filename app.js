@@ -13,8 +13,8 @@ const path = require("path");
 
 // Kết nối tới MongoDB
 mongoose.connect("mongodb+srv://truongleu7:123123123@cluster0.tfv6c.mongodb.net/TinTucDB?retryWrites=true&w=majority&appName=Cluster0", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
+    // useNewUrlParser: true,
+    // useUnifiedTopology: true
 })
 .then(() => console.log("✅ Kết nối MongoDB thành công"))
 .catch(err => console.error("❌ Lỗi kết nối MongoDB:", err));
@@ -58,5 +58,7 @@ app.use("/uploads", express.static("public/uploads"));
 
 // 📌 **Cho phép truy cập ảnh từ thư mục uploads**
 var server = app.listen(8080, () => {
-   console.log("🚀 Server đang chạy tại cổng 8080");
-});
+    console.log("🚀 Server đang chạy tại cổng 8080");
+ });
+ 
+ module.exports = { app, server }; // ✅ Export cả app và server
