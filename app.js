@@ -11,7 +11,7 @@ const MongoStore = require("connect-mongo");
 const multer = require("multer");
 const path = require("path");
 
-// Kết nối tới MongoDB
+// Kết nối tới MongoDB qua tuyet voi
 mongoose.connect("mongodb+srv://truongleu7:123123123@cluster0.tfv6c.mongodb.net/TinTucDB?retryWrites=true&w=majority&appName=Cluster0", {
     // useNewUrlParser: true,
     // useUnifiedTopology: true
