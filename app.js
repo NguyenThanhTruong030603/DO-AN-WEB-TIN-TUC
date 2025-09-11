@@ -57,7 +57,7 @@ app.post("/upload-image", upload.single("upload"), (req, res) => {
 app.use("/uploads", express.static("public/uploads"));
 
 // 📌 **Cho phép truy cập ảnh từ thư mục uploads**
-var server = app.listen(8080, () => {
+var server = app.listen(8000, () => {
     console.log("🚀 Server đang chạy tại cổng 8080");
  });
  
