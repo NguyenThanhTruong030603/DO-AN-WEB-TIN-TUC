@@ -22,12 +22,13 @@ pipeline {
             steps {
                 sh '''
                   # Dừng tiến trình cũ trên port 8000 (nếu có)
-                  fuser -k 8000/tcp || true
+                  sudo fuser -k 8000/tcp || true
                   
                   # Chạy app.js nền
-                  nohup node app.js > app.log 2>&1 &
+                  nohup node app.js --host 0.0.0.0 > /tmp/app.log 2>&1 &
                 '''
             }
         }
     }
 }
+
