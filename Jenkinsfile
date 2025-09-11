@@ -18,19 +18,16 @@ pipeline {
             }
         }
 
-       stage('Run app.js') {
-    steps {
-        sh '''
-        cd $WORKSPACE
-        # kill port 8000 nếu có
-        fuser -k 8000/tcp || true
-        # chạy Node.js nền, log trong workspace
-        nohup node app.js --host 0.0.0.0 > $WORKSPACE/app.log 2>&1 &
-        '''
+        stage('Run app.js') {
+            steps {
+                sh '''
+                # kill port 8000 nếu có
+                fuser -k 8000/tcp || true
+                
+                # chạy Node.js nền dưới user ubuntu, log lưu trong /tmp
+                sudo -u ubuntu nohup node app.js --host 0.0.0.0 > /tmp/app.log 2>&1 &
+                '''
+            }
+        }
     }
 }
-
-    }
-}
-
-
